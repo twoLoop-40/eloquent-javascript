@@ -10,7 +10,7 @@ const liftToArray = function (item) {
 
 // (start, end, step) -> []
 // start 에서 step만큼 더해서 end까지 숫자를 붙여나감
-const range = function (start, end, step) {
+const range = function (start, end, step = 1) {
   // step만큼 더해서 배열에 붙이는 함수
   const addItemToTail = entailItem(step);
 

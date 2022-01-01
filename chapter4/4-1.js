@@ -11,17 +11,23 @@ const liftToArray = function (item) {
 // (start, end, step) -> []
 // start 에서 step만큼 더해서 end까지 숫자를 붙여나감
 const range = function (start, end, step) {
-  // step만큼 올리는 jumper를 만듦
-  const makejump = entailItem(step);
+  // step만큼 더해서 배열에 붙이는 함수
+  const addItemToTail = entailItem(step);
 
   let result = liftToArray(start);
   let currentPosition = start;
-  while (currentPosition + step < end) {
-    result = makejump(result);
+  while (currentPosition + step <= end) {
+    result = addItemToTail(result);
     currentPosition += step;
   }
   return result;
 };
 
+// 배열에 있는 원소를 합하기
+const sum = function (arr = []) {
+  return arr.reduce((total, value) => total + value, 0);
+};
+
 // 결과
-console.log(range(1, 15, 3));
+console.log(range(1, 15, 2));
+console.log(sum(range(1, 15, 2)));

@@ -16,6 +16,16 @@ const arrayToList = function (anArray = []) {
   }
 };
 
+// prepend:: (any, List) -> List
+// any를 aList 앞에 붙이는 헬퍼함수
+const prepend = function (item, aList) {
+  return item === undefined || item === null
+    ? aList
+    : { value: item, rest: aList };
+};
+
 // 테스트
 const testArray = [1, 2, 3];
-console.log(arrayToList(testArray));
+const listFromTest = arrayToList(testArray);
+console.log(listFromTest);
+console.log(prepend(4, listFromTest));

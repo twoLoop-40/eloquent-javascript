@@ -1,3 +1,4 @@
+// flatten:: [][] -> []
 // array를 받아서 첫번째 엔트리를 꺼내서 array 아니면 붙여 나감 array 이면 재귀
 const flatten = function (anArray) {
   return anArray.reduce((result, item) => {

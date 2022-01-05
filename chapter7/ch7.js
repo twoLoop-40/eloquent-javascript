@@ -68,9 +68,11 @@ let next = first.move("Alice's House");
 // village state와 memory를 이용하여 action = { direction, memory } 를 결정
 // state와 memory를 재할당
 const runRobot = function (state, robot, memory) {
+  let totalTurns = 0;
   for (let turn = 0; ; turn++) {
     if (state.parcels.length == 0) {
       console.log(`Done in ${turn} turns`);
+      totalTurns = turn;
       break;
     }
     let action = robot(state, memory);
@@ -78,6 +80,7 @@ const runRobot = function (state, robot, memory) {
     memory = action.memory;
     console.log(`Moved to ${action.direction}`);
   }
+  return totalTurns;
 };
 
 // random 하게 할일 결정하기
@@ -158,7 +161,9 @@ const goalOrientedRobot = function ({ place, parcels }, route = []) {
 //runRobot(VillageState.random(), randomRobot);
 
 // routeRobot로 실행하기
-runRobot(VillageState.random(), routeRobot, mailRoute);
+// runRobot(VillageState.random(), routeRobot, mailRoute);
 
 // goalOrientedRobot으로 실행
 //runRobot(VillageState.random(), goalOrientedRobot);
+
+export { runRobot, VillageState, randomRobot, routeRobot, goalOrientedRobot };

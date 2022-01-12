@@ -103,6 +103,7 @@ VillageState.random = function (parcelCount = 5) {
     } while (place == address);
     parcels.push({ place, address });
   }
+  console.log(parcels);
   return new VillageState("Post Office", parcels);
 };
 
@@ -164,6 +165,6 @@ const goalOrientedRobot = function ({ place, parcels }, route = []) {
 // runRobot(VillageState.random(), routeRobot, mailRoute);
 
 // goalOrientedRobot으로 실행
-//runRobot(VillageState.random(), goalOrientedRobot);
+runRobot(VillageState.random(), goalOrientedRobot);
 
 export { runRobot, VillageState, randomRobot, routeRobot, goalOrientedRobot };

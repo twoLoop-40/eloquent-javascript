@@ -1,22 +1,3 @@
-const elt = function (type, ...children) {
-  let node = document.createElement(type);
-  for (let child of children) {
-    if (typeof child != "string") node.appendChild(child);
-    else node.appendChild(document.createTextNode(child));
-  }
-  return node;
-};
-
-// tr에 td 넣기
-const makeTr = function (row) {
-  return elt(
-    "tr",
-    elt("td", row.name),
-    elt("td", row.height.toString()),
-    elt("td", row.place)
-  );
-};
-
 const MOUNTAINS = [
   { name: "Kilimanjaro", height: 5895, place: "Tanzania" },
   { name: "Everest", height: 8848, place: "Nepal" },
@@ -26,18 +7,41 @@ const MOUNTAINS = [
   { name: "Popocatepetl", height: 5465, place: "Mexico" },
   { name: "Mont Blanc", height: 4808, place: "Italy/France" },
 ];
+// 노드만들기
+// tabel 시작하기
+const startTable = function ({ id = "", className = "" } = {}) {
+  const tableBox = document.createElement("table");
+  if (id) tableBox.setAttribute("id", id);
+  else if (className) tableBox.setAttribute("className", className);
+  return tableBox;
+};
 
-// Your code here
-const mountainsTable = document.createElement("table");
-mountainsTable.setAttribute("class", "mountains-table");
-mountainsTable.appendChild(
-  elt("tr", elt("th", "name"), elt("th", "height"), elt("th", "place"))
-);
-// mountains 붙이기
-for (const row of MOUNTAINS) {
-  mountainsTable.appendChild(makeTr(row));
-}
+// tableBox 받아서 tableElements를 받아서 한줄 씩 붙여 나가기
+const fillUpTable = function (type = "", tableElemStrings = []) {
+  // row를 만들어두기
+  const tableElems = tableElemStrings.map((itemName) => {
+    const typeElement = document.createElement(type);
+    typeElement.appendChild(document.createTextNode(itemName));
+    return typeElement;
+  });
+  // tr에 붙이기
+  const tr = document.createElement("tr");
+  tableElems.forEach((item) => tr.appendChild(item));
+  return (tableBox) => {
+    // tableBox에 달아서 리턴
+    tableBox.appendChild(tr);
+    return tableBox;
+  };
+};
+// mountains 의 요소들을 주어진 속성의 순서대로 배열로 바꾸기
+const changeType = function (items = {}) {
+  return (...props) => props.map((prop) => items[prop].toString());
+};
 
-// mountains에 tag child 붙이기
-const mountainsBox = document.getElementById("mountains");
-mountainsBox.appendChild(mountainsTable);
+const props = ["name", "height", "place"];
+// table 시작하기
+const table = fillUpTable("th", props)(startTable());
+MOUNTAINS.map((mountain) => changeType(mountain)(...props))
+  .map((mountainArray) => fillUpTable("td", mountainArray))
+  .forEach((row) => row(table));
+document.getElementById("mountains").appendChild(table);

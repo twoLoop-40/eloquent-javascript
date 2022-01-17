@@ -1,15 +1,15 @@
 const Promise_all = function (promises) {
   return new Promise((resolve, reject) => {
-    const length = promises.length;
-    //if (length == 0) resolve(promises);
     let result = [];
-    //let count = 0;
     for (let [idx, p] of promises.entries()) {
       p.then((value) => {
         result[idx] = value;
       }).catch((err) => reject(err));
     }
-    setTimeout(() => resolve(result), 1000);
+    setTimeout(() => resolve(result), 300);
+    // Promise.resolve()
+    //   .then(() => console.log("한번 쉬고"))
+    //   .then(() => resolve(result));
   });
 };
 
@@ -32,5 +32,5 @@ Promise_all([soon(1), Promise.reject("X"), soon(3)])
   .catch((error) => {
     if (error != "X") {
       console.log("Unexpected failure:", error);
-    }
+    } else console.error(error);
   });

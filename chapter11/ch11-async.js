@@ -109,6 +109,7 @@ everywhere((nest) => {
 });
 
 // 길찾기 함수
+// at 을 업데이트 시켜서 to 까지 도달하면 첫번째 via를 리턴하게 하는 함수
 const findRoute = function (from, to, connections) {
   let work = [{ at: from, via: null }];
   for (let i = 0; i < work.length; i++) {
@@ -122,3 +123,19 @@ const findRoute = function (from, to, connections) {
   }
   return null;
 };
+
+// 멀리 떨어진 곳에 리퀘스트 하기
+// findRoute를 이용해서 하나씩 플로등 해나가기
+const routeRequest = function (nest, target, type, content) {
+  if (nest.neighbors.includes(target)) {
+    return request(nest, target, type, content);
+  } else {
+    via = findRoute(nest.name, target, nest.state.connections);
+    if (!via) throw new Error(`No route to ${target}`);
+    return request(nest, via, "route", { target, type, content });
+  }
+};
+
+requestType("route", (nest, { target, type, content }) => {
+  return routeRequest(nest, target, type, content);
+});

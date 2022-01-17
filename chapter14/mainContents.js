@@ -17,7 +17,6 @@ const elt = function (type, ...children) {
   }
   return node;
 };
-
 document
   .getElementById("quote")
   .appendChild(
@@ -30,3 +29,7 @@ document
       ", 1950"
     )
   );
+
+let para = document.body.getElementsByTagName("p")[0];
+console.log("clientHeight: ", para.clientHeight);
+console.log("offsetHeight: ", para.offsetHeight);

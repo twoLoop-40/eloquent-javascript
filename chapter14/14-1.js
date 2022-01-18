@@ -8,7 +8,7 @@ const MOUNTAINS = [
   { name: "Mont Blanc", height: 4808, place: "Italy/France" },
 ];
 // 노드만들기
-// tabel 시작하기
+// table 시작하기
 const startTable = function ({ id = "", className = "" } = {}) {
   const tableBox = document.createElement("table");
   if (id) tableBox.setAttribute("id", id);

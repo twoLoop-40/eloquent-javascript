@@ -75,6 +75,7 @@ function startBalloon() {
 }
 
 const balloon = startBalloon();
+
 function resizePic(event) {
   event.preventDefault();
   const arrowKey = ArrowKey.makeArrowKey(event);

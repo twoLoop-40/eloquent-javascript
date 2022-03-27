@@ -20,7 +20,12 @@ function requestFetch(url) {
       this.url = url;
     }
   }
-  const types = ["text/plain", "text/html", "application/json"];
+  const types = [
+    "text/plain",
+    "text/html",
+    "application/json",
+    "applicaation/rainbows+unicorns",
+  ];
   return Promise.all(
     types
       .map((type) => {

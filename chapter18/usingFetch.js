@@ -24,7 +24,7 @@ function requestFetch(url) {
     "text/plain",
     "text/html",
     "application/json",
-    "applicaation/rainbows+unicorns",
+    "application/rainbows+unicorns",
   ];
   return Promise.all(
     types

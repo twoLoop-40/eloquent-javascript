@@ -8,7 +8,7 @@ function requestFetch(url) {
       return fetch(url, { headers });
     }
     setContentType(type = "") {
-      this.headers = { accept: type };
+      this.headers = { accept: type }; //여기 accept 필드는 참고했습니다.
       return this;
     }
     setUrl(url) {
